@@ -1,21 +1,42 @@
-class Word{
-  constructor(word, definition, pictureUrl){
-      this.word = word; // 単語の名前。
-      this.definition = definition; // 単語の定義。
-      this.pictureUrl = pictureUrl; // 単語の画像のURL。
+document.addEventListener('DOMContentLoaded', () => {
+  class Word{
+    constructor(word, definition, pictureUrl){
+        this.word = word; // 単語の名前。
+        this.definition = definition; // 単語の定義。
+        this.pictureUrl = pictureUrl; // 単語の画像のURL。
   }
 }
-
 class EmotionObject{
-  constructor(emotion, face, description, color, onomatopoeia){
-      this.emotion = emotion; // 感情の名前。
-      this.face = face;
-      this.description = description; // その感情の説明。
-      this.color = color; // 感情を表す色。
-      this.onomatopoeia = onomatopoeia; // 単語の英語の擬音語を表す文字列の配列。
+    constructor(emotion, face, description, color, onomatopoeia){
+        this.emotion = emotion; // 感情の名前。
+        this.face = face;
+        this.description = description; // その感情の説明。
+        this.color = color; // この感情を表す色。
+        this.onomatopoeia = onomatopoeia; // その感情の擬音語を表す文字列の配列。
+    }
+    // 感情のすべての擬音語の Word オブジェクトの配列を返します。
+    getOnomatopoeiaWords(){
+        // 擬音語の文字列配列を Word オブジェクトの配列に変換します
+        return this.onomatopoeia.map(word => new Word(
+            word,
+            dictionary[word],
+            pictureDictionary[word]
+        ));
+    }
+
+    // コンテナのHTMLを文字列として返します
+    getHtmlContainerString(){
+        return (`
+            <li style='background: ${this.color}' class='linkWrapper'>
+                <a class='linkContents' href="#sec${this.emotion}">
+                    <h2>${this.emotion}</h2>
+                    <h3>${this.face}</h3>
+                    <p>${this.description}</p>
+                </a>
+            </li>
+        `);
+    }
   }
-}
-//グローバル定数
 const dictionary = {
   "bark":"the sound made by a dog",
   "grunt":"issue a low, animal-like noise",
@@ -73,53 +94,21 @@ const pictureDictionary = {
 };
 
 const emotions = [
-  new EmotionObject(
-    "angry",
-    "😠",
-    "feeling or showing strong annoyance, displeasure, or hostility; full of anger.",
-    "red",
-    ["bark", "grunt", "roar", "whack", "smack", "hiss"]
-  ),
-  new EmotionObject(
-    "happy",
-    "😚",
-    "feeling or showing pleasure or contentment.",
-    "yellow",
-    ["bling", "chatter", "chant", "giggle"]
-  ),
-  new EmotionObject(
-    "bad",
-    "😨",
-    "not such as to be hoped for or desired; unpleasant or unwelcome.",
-    "beige",
-    ["ahem", "clatter", "clunk"]
-  ),
-  new EmotionObject(
-    "sad",
-    "😭",
-    "feeling or showing sorrow; unhappy.",
-    "grey",
-    ["bawl", "whine", "waah"]
-  ),
-  new EmotionObject(
-    "surprised",
-    "😳",
-    "to feel mild astonishment or shock.",
-    "purple",
-    ["boom", "honk", "zing"]
-  ),
-  new EmotionObject(
-    "fearful",
-    "😒",
-    "feeling afraid; showing fear or anxiety.",
-    "green",
-    ["buzz", "caw", "crawl"]
-  ),
-  new EmotionObject(
-    "disgusted",
-    "😣",
-    "feeling or showing strong annoyance, displeasure, or hostility; full of anger.",
-    "orange",
-    ["flick", "gargle", "oink"]
-  )
+  new EmotionObject("angry", "😠", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "red", ["bark","grunt", "roar","whack","smack","hiss"]),
+  new EmotionObject("happy", "😚", "feeling or showing pleasure or contentment.", "yellow", ["bling","chatter","chant","giggle"]),
+  new EmotionObject("bad", "😨", "not such as to be hoped for or desired; unpleasant or unwelcome.", "beige", ["ahem","clatter","clunk"]),
+  new EmotionObject("sad", "😭", "feeling or showing sorrow; unhappy.", "grey", ["bawl","whine","waah"]),
+  new EmotionObject("surprised", "😳", "to feel mild astonishment or shock.", "purple", ["boom","honk","zing"]),
+  new EmotionObject("fearful", "😒", "feeling afraid; showing fear or anxiety.", "green", ["buzz","caw","crawl"]),
+  new EmotionObject("disgusted", "😣", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "orange", ["flick","gargle","oink"])
 ];
+let linkContents = "<ul class ='linkContainer'>";
+emotions.forEach(emotion => {
+  linkContents += emotion.getHtmlContainerString();
+});
+linkContents += "</ul>";
+document.getElementById('linkContainer').innerHTML = linkContents;
+
+detailContents = "<ul class='detailContainer'>";
+
+});
