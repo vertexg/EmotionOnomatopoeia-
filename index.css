@@ -3,6 +3,94 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 100%;
+  width: 90%;
   max-width: 980px;
+  margin: 0 auto;
+}
+
+.linkWrapper {
+  list-style: none;
+  width: 32%;
+  height: 280px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.linkContents {
+  text-decoration: none;
+  color: #fff;
+}
+
+.linkContents h2{
+  margin: 20px 0 0;
+}
+
+.linkContents h3 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.linkContents p {
+  margin: 0;
+}
+
+/* detail */
+.detailContainer {
+  margin:0;
+  padding: 0;
+}
+
+.detailContents{
+  list-style: none;
+  color: #fff;
+  padding-top: 32px;
+
+
+
+}
+
+.detailContents h3,
+.detailContents p,
+.cardsWrapper {
+  width: 92%;
+  max-width: 1100px;
+}
+
+.detailContents h3{
+  margin: 0 auto;
+}
+.detailContents p {
+  margin: 10px auto 32px;
+}
+
+.cardsWrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: #333;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  width: 42%;
+  margin-bottom: 16px;
+  padding: 10px 8px 10px 16px;
+}
+
+.cardLeft {
+  width: 60%;
+}
+.cardLeft h3 {
+  margin: 8px 0 24px 0;
+}
+.cardLeft p {
+  margin: 0;
+}
+
+.card img {
+  width: 0%;
+  height: auto;
 }

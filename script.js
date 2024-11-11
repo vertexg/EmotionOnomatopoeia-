@@ -107,8 +107,31 @@ emotions.forEach(emotion => {
   linkContents += emotion.getHtmlContainerString();
 });
 linkContents += "</ul>";
-document.getElementById('linkContainer').innerHTML = linkContents;
 
-detailContents = "<ul class='detailContainer'>";
-
+let detailContents = "<ul class='detailContainer'>";
+emotions.forEach(emotion => {
+  let words = emotion.getOnomatopoeiaWords();
+  let cards = "<div class='cardsWrapper'>";
+  words.forEach(word => {
+    cards += `
+      <div class='card'>
+        <div class='cardLeft'>
+          <h3>${word.word}</h3>
+          <p>${word.definition}</p>
+        </div>
+        <img src='${word.pictureUrl}'>
+      </div>
+    `;
+  });
+  cards += "</div>";
+  detailContents += `
+    <li id='sec${emotion.emotion}' class='detailContents' style='background: ${emotion.color}'>
+      <h3>${emotion.emotion}</h3>
+      <p>${emotion.description}</p>
+      ${cards}
+    </li>
+  `;
+});
+detailContents += "</ul>";
+document.getElementById('target').innerHTML = linkContents + detailContents;
 });
